@@ -1,8 +1,11 @@
 package com.sajid;
 
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+
+import com.mysql.cj.x.protobuf.MysqlxCrud.Delete;
+import com.sajid.curd.Delete1;
+import com.sajid.curd.Save;
 
 public class Main {
 
@@ -11,15 +14,15 @@ public class Main {
 		
 		SessionFactory sf = new Configuration()
 				.configure()
-				.addAnnotatedClass(Employee.class)
+				//.addAnnotatedClass(Employee.class)
+				.addAnnotatedClass(TechName.class)
+				.addAnnotatedClass(Technology.class)
 				.buildSessionFactory();
 		
-		Session session = sf.getCurrentSession();
-		session.beginTransaction();
-		Name name = new Name("a","b","c","d");
-		Employee emp = new Employee(name, 100,"sajid.com");
-		session.save(emp);
-		session.getTransaction().commit();
+		Save  sobj = new Save();
+		sobj.Save(sf);
+		//Delete1 dobj = new Delete1();
+		//dobj.delet(sf);
 		
 		
 	}
